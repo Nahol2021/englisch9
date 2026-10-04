@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>California Dreaming Trainer</title>
+<meta name="description" content="Englisch Klasse 9: Training für die 1. Klassenarbeit (California Dreaming)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="slate" aria-hidden="true"></div>
+      <h1>California<br>Dreaming</h1>
+      <p>Englisch Klasse 9 · Training für die 1. Klassenarbeit</p>
+    </div>
+    <nav id="nav" aria-label="Bereiche"></nav>
+    <p class="foot-note">Dein Fortschritt wird nur in diesem Browser gespeichert. Vokabeln aus Navigium (Greenline 5), Übungstexte selbst geschrieben.</p>
+  </aside>
+
+  <main id="main">
+
+  <!-- ============ START ============ -->
+  <section class="sec" data-sec="start">
+    <div class="kicker">Klasse 9 · 1. Klassenarbeit · Unterrichtsvorhaben 9.1-1</div>
+    <h2>California Dreaming</h2>
+    <p class="lead">Alles, was laut eurem schulinternen Curriculum in der ersten Arbeit drankommen kann – mit Erklärungen, sofortiger Rückmeldung und einem Fehlertrainer, der sich merkt, was du noch übst.</p>
+
+    <div class="grid2">
+      <div class="rule">
+        <div class="tag">Was in der Arbeit geprüft wird</div>
+        <ul>
+          <li><b>Schreiben: Charakterisierung</b> – der feste Teil</li>
+          <li><b>dazu:</b> Leseverstehen <i>oder</i> Hörverstehen bzw. Sprachmittlung</li>
+          <li><b>und/oder:</b> sprachliche Mittel isoliert (Vokabeln, Grammatik)</li>
+        </ul>
+        <p class="muted" style="margin:10px 0 0;font-size:14px">Frag deine Lehrkraft, ob Hörverstehen oder Sprachmittlung drankommt – dann weißt du, worauf du den Schwerpunkt legst.</p>
+      </div>
+      <div class="rule">
+        <div class="tag">Was du können musst</div>
+        <ul>
+          <li><b>Wortschatz:</b> Greenline 5, Lektion 1 (aus deinem Navigium) · Charakter-Adjektive für die Charakterisierung</li>
+          <li><b>Grammatik:</b> infinitive with/without <i>to</i> · gerund or infinitive? · adding emphasis</li>
+          <li><b>Texte:</b> Blog-Eintrag, Autobiografie, Romanauszug lesen und auswerten</li>
+          <li><b>Hören:</b> Details eines Gesprächs (z. B. zwischen Schauspielern)</li>
+          <li><b>Mediation:</b> über die amerikanische Filmindustrie berichten</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:34px">Dein Stand</h3>
+    <p class="muted" style="margin-top:4px">Bestwerte aus allen Übungen eines Bereichs. Tipp auf eine Zeile, um hinzuspringen.</p>
+    <div class="prog" id="prog"></div>
+
+    <h3 style="margin-top:34px">Lernplan</h3>
+    <p class="muted" style="margin-top:4px">Eine sinnvolle Reihenfolge – hak ab, was du erledigt hast.</p>
+    <div class="rule check-list" id="plan"></div>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="sec" data-sec="vocab" hidden>
+    <div class="kicker">Sprachliche Mittel · Wortschatz</div>
+    <h2>Greenline 5 · Lektion 1</h2>
+    <p class="lead">Genau die Vokabeln, die in deinem Navigium stehen – aus dem neuesten Buch. Lern sie mit Karteikarten, festige sie im Zuordnen und prüf zum Schluss die Rechtschreibung, die in der Arbeit bewertet wird.</p>
+    <p class="muted" id="voc-source" style="font-size:14px;margin-top:-8px"></p>
+    <div class="row" style="margin-bottom:6px">
+      <span class="label-sm" style="margin:0">Seite:</span>
+      <div class="chips" id="topic-chips"></div>
+    </div>
+    <div id="voc-tools"></div>
+    <details class="more" style="margin-top:24px">
+      <summary>Komplette Wortliste anzeigen</summary>
+      <div id="voc-list" style="margin-top:12px"></div>
+    </details>
+  </section>
+
+  <!-- ============ INFINITIVE ============ -->
+  <section class="sec" data-sec="inf" hidden>
+    <div class="kicker">Sprachliche Mittel · Grammatik 1</div>
+    <h2>The infinitive with and without <i>to</i></h2>
+    <p class="lead">Meistens steht der Infinitiv mit <i>to</i>. Lern deshalb vor allem die Fälle <b>ohne</b> <i>to</i> – das sind wenige, und genau die werden abgefragt.</p>
+    <div class="grid2">
+      <div class="rule">
+        <div class="tag">ohne to (bare infinitive)</div>
+        <ul>
+          <li>nach <b>Modalverben</b>: can, must, should, will, would, may, might, could<br><span class="ex-en">You should learn your lines.</span></li>
+          <li><b>let / make</b> + Objekt<br><span class="ex-en">The director made us repeat the scene.</span></li>
+          <li><b>had better</b>, <b>would rather</b><br><span class="ex-en">You'd better be on time.</span></li>
+          <li>Wahrnehmung: <b>see / hear / watch / feel</b> + Objekt<br><span class="ex-en">I heard him shout.</span></li>
+          <li>nach <b>do / does / did</b> und in <b>Why not …?</b></li>
+          <li><b>help</b> + (Objekt): mit oder ohne <i>to</i></li>
+        </ul>
+      </div>
+      <div class="rule">
+        <div class="tag">mit to</div>
+        <ul>
+          <li>nach den meisten <b>Verben</b>: want, decide, hope, plan, agree, refuse …</li>
+          <li><b>Verb + Objekt + to</b>: want/ask/tell/expect sb <b>to</b> do</li>
+          <li>nach <b>Adjektiven</b>: <span class="ex-en">It's hard to find a flat.</span></li>
+          <li>nach <b>Fragewörtern</b>: what to do, how to act</li>
+          <li><b>Zweck</b> (um … zu): <span class="ex-en">She went to LA to act.</span></li>
+          <li><b>too / enough</b>: too young to sign, old enough to drive</li>
+          <li><b>the first / last / only</b>: the first woman to win</li>
+          <li>have to, be allowed to, be able to, used to</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rule" style="margin-top:14px">
+      <div class="tag">Falle: Passiv</div>
+      Aktiv ohne <i>to</i>, Passiv mit <i>to</i>:<br>
+      <span class="ex-en">They <b>made</b> us <b>wait</b>.</span> → <span class="ex-en">We <b>were made to wait</b>.</span> &nbsp;·&nbsp;
+      <span class="ex-en">I <b>saw</b> him <b>leave</b>.</span> → <span class="ex-en">He <b>was seen to leave</b>.</span>
+    </div>
+    <div data-ex="g1a"></div>
+    <div data-ex="g1b"></div>
+  </section>
+
+  <!-- ============ GERUND ============ -->
+  <section class="sec" data-sec="ger" hidden>
+    <div class="kicker">Sprachliche Mittel · Grammatik 2</div>
+    <h2>Gerund or infinitive?</h2>
+    <p class="lead">Das Verb davor entscheidet. Es gibt drei Gruppen: nur <b>-ing</b>, nur <b>to</b>, und Verben, bei denen beides geht – manchmal mit anderer Bedeutung.</p>
+    <div class="grid3">
+      <div class="rule"><div class="tag">nur -ing</div>enjoy, avoid, mind, finish, keep, suggest, practise, miss, risk, imagine, give up, can't help, can't stand, look forward to, be used to<br><span class="ex-en">She enjoys acting.</span></div>
+      <div class="rule"><div class="tag">nur to-infinitive</div>want, would like, decide, hope, plan, agree, refuse, promise, manage, afford, expect, offer, seem, learn, choose<br><span class="ex-en">He decided to move to LA.</span></div>
+      <div class="rule"><div class="tag">beides, gleiche Bedeutung</div>begin, start, continue, like, love, hate, prefer<br><span class="ex-en">It started to rain. / It started raining.</span><br><span class="muted" style="font-size:14px">aber: would like/love/prefer + <b>to</b></span></div>
+    </div>
+    <div class="rule" style="margin-top:14px">
+      <div class="tag">Immer -ing</div>
+      nach <b>Präpositionen</b> (interested in, good at, tired of, instead of, before, after, without …) und als <b>Subjekt</b> am Satzanfang: <span class="ex-en">Waiting for a callback is stressful.</span><br>
+      <span class="muted" style="font-size:14px">Achtung: In <i>look forward to</i>, <i>be used to</i>, <i>object to</i> ist <i>to</i> eine Präposition → <span class="ex-en">I'm looking forward to meeting you.</span></span>
+    </div>
+    <h3 style="margin-top:28px">Beides möglich, aber andere Bedeutung</h3>
+    <div class="tbl-wrap" style="margin-top:10px"><table>
+      <tr><th>Verb</th><th>+ -ing</th><th>+ to-infinitive</th></tr>
+      <tr><td><b>remember</b></td><td>sich erinnern (Vergangenes)<br><span class="ex-en">I remember meeting her.</span></td><td>daran denken (Zukünftiges)<br><span class="ex-en">Remember to call her!</span></td></tr>
+      <tr><td><b>forget</b></td><td>vergessen, dass man etwas getan hat<br><span class="ex-en">I'll never forget seeing the sign.</span></td><td>vergessen, etwas zu tun<br><span class="ex-en">Don't forget to bring your CV.</span></td></tr>
+      <tr><td><b>stop</b></td><td>aufhören<br><span class="ex-en">She stopped smoking.</span></td><td>anhalten, um zu<br><span class="ex-en">She stopped to take a photo.</span></td></tr>
+      <tr><td><b>try</b></td><td>ausprobieren<br><span class="ex-en">Try drinking some tea.</span></td><td>versuchen, sich bemühen<br><span class="ex-en">He tried to lift the camera.</span></td></tr>
+      <tr><td><b>regret</b></td><td>bereuen<br><span class="ex-en">I regret quitting.</span></td><td>bedauern (mitteilen zu müssen)<br><span class="ex-en">We regret to inform you …</span></td></tr>
+      <tr><td><b>go on</b></td><td>weitermachen (dasselbe)<br><span class="ex-en">They went on talking.</span></td><td>danach etwas Neues tun<br><span class="ex-en">She went on to win an Oscar.</span></td></tr>
+    </table></div>
+    <div data-ex="g2s"></div>
+    <div data-ex="g2a"></div>
+    <div data-ex="g2b"></div>
+  </section>
+
+  <!-- ============ EMPHASIS ============ -->
+  <section class="sec" data-sec="emph" hidden>
+    <div class="kicker">Sprachliche Mittel · Grammatik 3</div>
+    <h2>Adding emphasis</h2>
+    <p class="lead">Mit diesen Mitteln hebst du etwas hervor – im Gespräch, um zu widersprechen, und in deinen Texten, um Wichtiges zu betonen. In Lucys Blog findest du gleich zwei davon.</p>
+    <div class="grid2">
+      <div class="rule"><div class="tag">1 · do / does / did + Infinitiv</div>
+        Betont einen bejahten Satz (oft als Widerspruch).<br>
+        <span class="ex-en">I <b>did</b> get a free sandwich.</span><br>
+        <span class="ex-en">She <b>does</b> want the role.</span><br>
+        Im Imperativ: <span class="ex-en"><b>Do</b> come in!</span><br>
+        <span class="muted" style="font-size:14px">Danach immer Grundform: did <s>got</s> → did get</span></div>
+      <div class="rule"><div class="tag">2 · It is / It was … who / that …</div>
+        Hebt <b>ein Satzglied</b> heraus.<br>
+        <span class="ex-en">Mia got the role.</span> →<br>
+        <span class="ex-en"><b>It was Mia who</b> got the role.</span><br>
+        <span class="ex-en"><b>It was in LA that</b> she met him.</span><br>
+        <span class="muted" style="font-size:14px">Person → who/that, Sache, Ort, Zeit → that</span></div>
+      <div class="rule"><div class="tag">3 · What … is / was …</div>
+        Spannung aufbauen, das Wichtige ans Ende.<br>
+        <span class="ex-en">I need a big break.</span> →<br>
+        <span class="ex-en"><b>What I need is</b> a big break.</span><br>
+        <span class="ex-en"><b>What they don't tell you is</b> how much it hurts.</span> (Lucys Blog)</div>
+      <div class="rule"><div class="tag">4 · Reflexivpronomen & Verstärker</div>
+        <span class="ex-en">She wrote the script <b>herself</b>.</span> (selbst)<br>
+        <b>so</b> + Adjektiv: <span class="ex-en">so nervous</span><br>
+        <b>such (a)</b> + (Adj.) Nomen: <span class="ex-en">such a great film, such fun</span><br>
+        <b>at all</b> (überhaupt nicht), <b>the very</b> (der/die/das aller…), <b>really</b>, <b>indeed</b></div>
+    </div>
+    <details class="more" style="margin-top:14px">
+      <summary>Für Profis: Inversion</summary>
+      <p style="margin:8px 0 0">In formellen Texten kann man nach verneinenden Ausdrücken Subjekt und Hilfsverb vertauschen:
+      <span class="ex-en"><b>Never have I</b> seen such a crowd.</span> · <span class="ex-en"><b>Not only did she</b> get the part, she also …</span> Klingt stark – setz es sparsam ein.</p>
+    </details>
+    <div data-ex="g3a"></div>
+    <div data-ex="g3b"></div>
+    <div data-ex="g3c"></div>
+  </section>
+
+  <!-- ============ READING ============ -->
+  <section class="sec" data-sec="read" hidden>
+    <div class="kicker">Kompetenzen · Leseverstehen</div>
+    <h2>Lucy's LA diary</h2>
+    <p class="lead">Ein Blog-Eintrag, wie er in der Arbeit vorkommen könnte. Lies ihn einmal ganz, dann bearbeite die Aufgaben. Die Zeilennummern brauchst du für Belege – auch nachher in der Charakterisierung.</p>
+    <div class="doc" id="blog"></div>
+    <div data-ex="r1"></div>
+    <div data-ex="r2"></div>
+    <div data-ex="r4"></div>
+    <div data-ex="r3"></div>
+  </section>
+
+  <!-- ============ LISTENING ============ -->
+  <section class="sec" data-sec="listen" hidden>
+    <div class="kicker">Kompetenzen · Hörverstehen</div>
+    <h2>First day on set</h2>
+    <p class="lead">Maya ist zum ersten Mal Statistin bei einem Dreh, Jake macht das seit Jahren. Hör dir das Gespräch an (der Browser liest es vor) und beantworte dann die Fragen. In der Arbeit hörst du meistens zweimal – lies die Fragen vorher.</p>
+    <div class="player" id="player">
+      <button class="btn primary" id="play-btn" type="button">▶ Abspielen</button>
+      <button class="btn" id="stop-btn" type="button">■ Stopp</button>
+      <label class="row" style="gap:6px;font-size:14px">Tempo
+        <select id="rate">
+          <option value="0.8">langsam</option>
+          <option value="0.95" selected>normal</option>
+          <option value="1.1">schnell</option>
+        </select>
+      </label>
+      <span class="stat" id="play-stat">0× gehört</span>
+    </div>
+    <p class="muted" id="tts-note" style="font-size:14px" hidden></p>
+    <div data-ex="l1"></div>
+    <details class="more" id="transcript-box">
+      <summary>Transkript (erst nach den Aufgaben öffnen)</summary>
+      <div class="script" id="script" style="margin-top:12px"></div>
+    </details>
+  </section>
+
+  <!-- ============ CHARACTERIZATION ============ -->
+  <section class="sec" data-sec="char" hidden>
+    <div class="kicker">Kompetenzen · Schreiben</div>
+    <h2>Writing a characterization</h2>
+    <p class="lead">Der Hauptteil der Arbeit. Eine Charakterisierung beschreibt <b>nicht nur</b>, wie eine Figur ist – sie <b>beweist</b> jede Eigenschaft mit dem Text und erklärt, was der Beleg zeigt.</p>
+
+    <div class="grid2">
+      <div class="rule"><div class="tag">direct characterization</div>
+        Eine Eigenschaft wird <b>ausdrücklich genannt</b> – vom Erzähler, einer anderen Figur oder der Figur selbst.<br>
+        <span class="ex-en">"You're smart, Lucy," Jess says.</span></div>
+      <div class="rule"><div class="tag">indirect characterization</div>
+        Du <b>schließt</b> auf die Eigenschaft aus Handlungen, Sprache, Gedanken, Aussehen, Umgebung oder Reaktionen anderer.<br>
+        <span class="ex-en">She cried, then put on lipstick and went to work.</span> → resilient</div>
+    </div>
+
+    <h3 style="margin-top:28px">So baust du sie auf</h3>
+    <div class="stack" style="margin-top:10px">
+      <div class="rule"><div class="tag">Introduction</div>Textsorte, Titel, (Autor/in), Name der Figur und wer sie ist (Alter, Situation). Gern ein Gesamteindruck als These:<br><span class="ex-en">In the blog entry "Waiting for My Big Break", Lucy, a 19-year-old aspiring actress, comes across as a determined but vulnerable young woman.</span></div>
+      <div class="rule"><div class="tag">Main part · ein Absatz pro Eigenschaft</div>
+        <b>C</b>laim – <b>E</b>vidence – <b>E</b>xplanation:<br>
+        <b>Claim:</b> <span class="ex-en">Lucy is very hard-working.</span><br>
+        <b>Evidence:</b> <span class="ex-en">She works "five nights a week as a waitress" ({L:five nights a week}) and goes to auditions during the day.</span><br>
+        <b>Explanation:</b> <span class="ex-en">This shows that she is willing to make sacrifices for her dream.</span><br>
+        <span class="muted" style="font-size:14px">Kurz zum Äußeren und zur Lebenssituation, dann die Charakterzüge – das Wichtigste zuerst.</span></div>
+      <div class="rule"><div class="tag">Conclusion</div>Fasse die wichtigsten Eigenschaften zusammen, evtl. Entwicklung der Figur oder dein Gesamteindruck. Keine neuen Belege.</div>
+    </div>
+
+    <div class="grid2" style="margin-top:14px">
+      <div class="rule"><div class="tag">Regeln</div><ul>
+        <li><b>simple present</b> – auch wenn der Text im past steht</li>
+        <li>nicht nacherzählen, sondern <b>deuten</b></li>
+        <li>jede Eigenschaft <b>belegen</b>: Zitat oder Paraphrase + Zeile</li>
+        <li>präzise Adjektive statt <i>nice, good, bad</i></li>
+        <li>sachlicher Stil: keine Kurzformen wie <i>don't</i> in deinen eigenen Sätzen</li>
+      </ul></div>
+      <div class="rule"><div class="tag">Zitieren</div><ul>
+        <li>eine Zeile: "…" (l. 12)</li>
+        <li>mehrere Zeilen: "…" (ll. 12–13)</li>
+        <li>Auslassung: "I went […] to Los Angeles"</li>
+        <li>Anpassung: "drove to [her] shift"</li>
+        <li>Zitate in den eigenen Satz einbauen, nicht allein stehen lassen</li>
+      </ul></div>
+    </div>
+
+    <h3 style="margin-top:28px">Useful phrases</h3>
+    <div class="tbl-wrap" style="margin-top:10px"><table>
+      <tr><th>Wofür</th><th>Phrases</th></tr>
+      <tr><td>Eigenschaft nennen</td><td>X comes across as … · X seems to be … · X appears to be … · One of X's main traits is …</td></tr>
+      <tr><td>Belegen</td><td>This becomes clear when … · For example, … · As X says, "…" (l. 5) · In line 5, X …</td></tr>
+      <tr><td>Erklären</td><td>This shows / suggests / proves that … · This is underlined by the fact that … · which indicates that …</td></tr>
+      <tr><td>Verbinden</td><td>First of all · Furthermore · Moreover · In addition · However · Although … · On the other hand</td></tr>
+      <tr><td>Schluss</td><td>All in all, … · To sum up, … · Overall, X is a … who …</td></tr>
+    </table></div>
+
+    <div data-ex="c1"></div>
+    <div data-ex="c2"></div>
+    <div data-ex="c4"></div>
+    <div data-ex="c3"></div>
+
+    <section class="ex" id="pad-char">
+      <div class="ex-head"><div><div class="kicker">Schreibaufgabe</div><h3>Characterize Lucy</h3></div><span class="badge" id="pad-char-badge">noch offen</span></div>
+      <p class="ex-intro">Schreib eine Charakterisierung von Lucy (ca. 250–300 Wörter) auf Grundlage ihres Blog-Eintrags (Bereich Leseverstehen). Die Prüfliste rechts unten zählt live mit. Dein Entwurf bleibt in diesem Browser gespeichert.</p>
+      <div id="pad-char-body"></div>
+    </section>
+  </section>
+
+  <!-- ============ MEDIATION ============ -->
+  <section class="sec" data-sec="med" hidden>
+    <div class="kicker">Kompetenzen · Sprachmittlung</div>
+    <h2>Extras in Hollywood</h2>
+    <p class="lead">Bei der Mediation gibst du einen deutschen Text sinngemäß auf Englisch wieder – für einen bestimmten Empfänger und Zweck. Nicht übersetzen, sondern auswählen und umformulieren.</p>
+    <div class="grid2">
+      <div class="rule"><div class="tag">So gehst du vor</div><ul>
+        <li>Aufgabe genau lesen: <b>Wer</b> will <b>was</b> wissen?</li>
+        <li>Nur die Infos, die zur Frage passen</li>
+        <li>In eigenen, einfachen Worten – nicht Wort für Wort</li>
+        <li>Fehlt dir ein Wort: <b>umschreiben</b> (an organization that …)</li>
+        <li>Textsorte beachten: E-Mail → Anrede, Bezug, Gruß</li>
+      </ul></div>
+      <div class="rule"><div class="tag">Die Aufgabe</div>
+        Your American friend Ethan is going to spend the summer with his uncle in Los Angeles and wants to work as an extra in a film. He asks you what you know about it. You have found the German article below.<br><br>
+        <b>Write an email to Ethan (about 150 words) in which you tell him the most important facts.</b></div>
+    </div>
+    <div class="doc" style="margin-top:14px">
+      <div class="doc-head">Übungstext (Zahlen gerundet)</div>
+      <div class="doc-title" style="font-size:24px">Statisten in Hollywood: Viel Warten für wenig Geld</div>
+      <p style="margin:0 0 10px">Rund 50.000 Menschen sind in Los Angeles als Komparsen registriert. Für einen Drehtag von bis zu zwölf Stunden bekommen sie meist zwischen 150 und 200 Dollar. Wer Mitglied der Schauspielergewerkschaft ist, verdient etwas mehr, zum Beispiel durch Zuschläge für Überstunden.</p>
+      <p style="margin:0 0 10px">Leben können die wenigsten davon: Die meisten Statisten haben einen zweiten Job, etwa als Kellner oder Fahrer. Der Alltag am Set besteht vor allem aus Warten. Oft sitzen die Komparsen stundenlang in Zelten neben dem Set, bevor sie für wenige Minuten vor die Kamera dürfen.</p>
+      <p style="margin:0 0 10px">Trotzdem lieben viele den Job. „Man ist mittendrin, wenn Filmgeschichte geschrieben wird“, sagt die 34-jährige Dana Reyes, die seit sechs Jahren als Statistin arbeitet.</p>
+      <p style="margin:0">Experten warnen allerdings: Der Weg vom Statisten zum Star gelingt nur sehr selten. Außerdem werden Komparsen in Massenszenen zunehmend durch computergenerierte Figuren ersetzt.</p>
+    </div>
+    <div data-ex="m1"></div>
+    <section class="ex" id="pad-med">
+      <div class="ex-head"><div><div class="kicker">Schreibaufgabe</div><h3>Email to Ethan</h3></div><span class="badge" id="pad-med-badge">noch offen</span></div>
+      <p class="ex-intro">Schreib die E-Mail. Danach hakst du ab, welche Infos du übernommen hast, und vergleichst mit der Musterlösung.</p>
+      <div id="pad-med-body"></div>
+    </section>
+  </section>
+
+  <!-- ============ TEST ============ -->
+  <section class="sec" data-sec="test" hidden>
+    <div class="kicker">Prüfen · Probearbeit</div>
+    <h2>Mock test: language</h2>
+    <p class="lead">25 zufällige Aufgaben aus allen Grammatik- und Wortschatzbereichen, ohne Rückmeldung bis zum Abgeben – wie in der Arbeit. Jede Runde wird neu gemischt.</p>
+    <div class="row" style="justify-content:space-between">
+      <button class="btn primary" id="test-new" type="button">Neue Probearbeit starten</button>
+      <span class="timer" id="test-timer" aria-live="off"></span>
+    </div>
+    <div id="test-box"></div>
+  </section>
+
+  <!-- ============ REVIEW ============ -->
+  <section class="sec" data-sec="review" hidden>
+    <div class="kicker">Prüfen · Fehlertrainer</div>
+    <h2>Your mistakes</h2>
+    <p class="lead">Alles, was du irgendwo falsch beantwortet hast, landet hier. Sobald du es richtig hast, verschwindet es. Ziel: leer.</p>
+    <div id="review-box"></div>
+  </section>
+
+  </main>
+</div>
+<script src="data/vokabeln.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
