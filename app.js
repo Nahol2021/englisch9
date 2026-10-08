@@ -5,7 +5,6 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const norm=s=>String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/[“”„"]/g,' ').replace(/[–—]/g,'-').replace(/[.,!?;:]/g,' ').replace(/\s+/g,' ').trim();
 const store={get(k,d){try{const v=localStorage.getItem('cd9:'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('cd9:'+k,JSON.stringify(v))}catch(e){}}};
-const SPEAK_ICON='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>';
 
 /* =================== reading text + line references =================== */
 const BLOG_PARAS=[
@@ -184,17 +183,6 @@ r3:{title:'Open questions',type:'open',intro:'Antworte in ganzen englischen Sät
 {q:'Describe how Lucy reacts to the rejection at last week\'s audition.',m:'First, she is very hurt: she sits in her car and cries "for twenty minutes" ({L:cried for twenty minutes}). Then she pulls herself together, puts on some lipstick and drives to her shift at the diner ({L:put on some lipstick}). She does not let the rejection stop her.'},
 {q:'Explain what Lucy means when she writes "neither does the rent" ({L:neither does the rent}).',m:'She means that her bills have to be paid no matter how she feels. The rent does not care about her bad day, so she has to go to work even when she is sad.'},
 {q:'Why does Lucy not give up, although her life in LA is hard?',m:'Acting is her passion. She remembers playing Juliet and hearing "three hundred people go completely silent" ({L:three hundred people go}). She wants to feel that again, because acting is "the only thing that makes [her] feel completely alive" ({L:the only thing that makes me}).'}
-]},
-l1:{title:'Listening comprehension',type:'mc',fixed:true,intro:'Die Fragen folgen der Reihenfolge des Gesprächs.',items:[
-{q:'When did Maya have to be on set?',o:['at 5:30 a.m.','at 11 p.m.','at 7:30 a.m.','at noon'],a:0,why:'"They told me to be here at five thirty this morning."'},
-{q:'What did Maya bring?',o:['one blue sweater','three outfits','a nurse\'s uniform','her own breakfast'],a:0,why:'"I only brought one, a blue sweater."'},
-{q:'Where is the catering truck?',o:['behind sound stage twelve','next to the parking lot','in the wardrobe tent','behind stage forty-two'],a:0,why:'"The catering truck is behind sound stage twelve."'},
-{q:'How long has Jake been working as an extra?',o:['eight years','eighteen years','two years','forty years'],a:0,why:'"Eight years." – 40 ist die Zahl seiner Filme als Kellner.'},
-{q:'What was Jake\'s line in one of his speaking roles?',o:['"Your table is ready, sir."','"Action!"','"Welcome to Hollywood."','"Police! Don\'t move!"'],a:0,why:'"I said, \'Your table is ready, sir\', to Brad Pitt\'s stunt double."'},
-{q:'How much does an extra earn for a twelve-hour day?',o:['about $200','about $120','about $900','about $40'],a:0,why:'"Extras get about two hundred dollars for a twelve-hour day."'},
-{q:'How else does Jake make a living?',o:['He drives for a delivery app.','He works as a waiter.','He teaches acting.','He works for the catering company.'],a:0,why:'"I also drive for a delivery app at night."'},
-{q:'Which of these is NOT one of Jake\'s rules?',o:['Always bring your own food.','Be on time.','Be quiet when the red light is on.','Don\'t talk to the stars first.'],a:0,why:'Seine drei Regeln: on time, quiet at the red light, never talk to the stars first.'},
-{q:'How would you describe Jake?',o:['experienced and helpful','arrogant and impatient','shy and nervous','bored and unfriendly'],a:0,why:'Er macht das seit acht Jahren und gibt Maya ungefragt Tipps.'}
 ]},
 c1:{title:'Direct or indirect?',type:'mc',keep:true,cats:['direct','indirect'],intro:'Wird die Eigenschaft ausdrücklich genannt (direct) oder musst du sie erschließen (indirect)?',items:[
 {q:'"You\'re smart, Lucy," Jess says.',a:0,why:'Eine andere Figur nennt die Eigenschaft (smart).'},
@@ -421,13 +409,6 @@ function buildExercise(exId,ex){
 /* =================== vocab tools =================== */
 let vocTopic=store.get('vocTopic','all');
 const vocPool=()=>vocTopic==='all'?ALLVOC:ALLVOC.filter(v=>v.topic===vocTopic);
-const tts={ok:'speechSynthesis' in window,voices:[]};
-function loadVoices(){try{tts.voices=speechSynthesis.getVoices().filter(v=>/^en[-_]/i.test(v.lang))}catch(e){tts.voices=[]}}
-if(tts.ok){loadVoices();try{speechSynthesis.addEventListener('voiceschanged',loadVoices)}catch(e){}}
-function pickVoice(i){const us=tts.voices.filter(v=>/en[-_]US/i.test(v.lang));const pool=us.length>1?us:tts.voices;return pool.length?pool[i%pool.length]:null}
-function say(text,{voice=0,pitch=1,rate=.95,onend}={}){if(!tts.ok){onend&&onend();return}
-  try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';const v=pickVoice(voice);if(v)u.voice=v;u.pitch=pitch;u.rate=rate;if(onend){u.onend=onend;u.onerror=e=>{if(e.error!=='interrupted'&&e.error!=='canceled')onend()}}speechSynthesis.speak(u)}catch(e){onend&&onend()}}
-const speakBtn=text=>tts.ok?h('button',{class:'speak',type:'button','aria-label':'Aussprache anhören: '+text,html:SPEAK_ICON,onclick(e){e.stopPropagation();speechSynthesis.cancel();say(cleanEn(text).replace(/\(([^)]*)\)/g,'$1').replace(/\bsb\b/g,'somebody').replace(/\bsth\b/g,'something').replace(/,/g,', '),{rate:.85})}}):null;
 
 function buildVocab(){
   const chips=$('#topic-chips');const tools=$('#voc-tools');
@@ -449,7 +430,7 @@ function buildVocab(){
       const face=h('button',{class:'flash',type:'button','aria-label':'Karte umdrehen',onclick(){flipped=!flipped;draw()}},
         flipped?[h('div',{class:'de'},v.de),h('div',{class:'w',style:'font-size:24px'},v.en),h('div',{class:'exs'},(WORTART[v.wa]||'')+' · '+TOPICS[v.topic])]:[h('div',{class:'w'},v.en),h('div',{class:'muted',style:'font-size:14px'},'antippen für die Bedeutung')]);
       box.append(face,h('div',{class:'row foot',style:'justify-content:space-between'},
-        h('div',{class:'row'},h('button',{class:'btn primary',type:'button',onclick(){deck.shift();flipped=false;draw()}},'Kann ich'),h('button',{class:'btn',type:'button',onclick(){deck.push(deck.shift());flipped=false;draw()}},'Nochmal'),speakBtn(v.en)),
+        h('div',{class:'row'},h('button',{class:'btn primary',type:'button',onclick(){deck.shift();flipped=false;draw()}},'Kann ich'),h('button',{class:'btn',type:'button',onclick(){deck.push(deck.shift());flipped=false;draw()}},'Nochmal')),
         h('span',{class:'counter muted'},'noch '+deck.length+' von '+first)))};
     draw();return card}
 
@@ -483,7 +464,7 @@ function buildVocab(){
   drawChips();drawTools();
 
   const list=$('#voc-list');
-  VDATA.lektionen.forEach(l=>{list.append(h('h4',{style:'margin-top:14px'},VDATA.buch+' · Lektion '+l.lektion+' · '+l.seite),h('div',{class:'tbl-wrap voc-list'},h('table',{},h('tr',{},h('th',{},'English'),h('th',{},'Deutsch'),h('th',{},'Wortart')),l.vokabeln.map(v=>h('tr',{},h('td',{},h('span',{class:'row',style:'gap:6px;flex-wrap:nowrap'},speakBtn(v.en),h('b',{},v.en))),h('td',{},v.de.join('; ')),h('td',{class:'muted'},WORTART[v.wortart]||v.wortart||''))))))});
+  VDATA.lektionen.forEach(l=>{list.append(h('h4',{style:'margin-top:14px'},VDATA.buch+' · Lektion '+l.lektion+' · '+l.seite),h('div',{class:'tbl-wrap voc-list'},h('table',{},h('tr',{},h('th',{},'English'),h('th',{},'Deutsch'),h('th',{},'Wortart')),l.vokabeln.map(v=>h('tr',{},h('td',{},h('b',{},v.en)),h('td',{},v.de.join('; ')),h('td',{class:'muted'},WORTART[v.wortart]||v.wortart||''))))))});
   $('#voc-source').textContent=VDATA.lektionen.length?VDATA.buch+' · '+VDATA.lektionen.map(l=>l.seite).join(', ')+' · '+ALLVOC.length+' Wörter aus deinem Navigium (Stand '+VDATA.stand.split('-').reverse().join('.')+')':'Keine Vokabeldaten gefunden – tools/navigium_export.py ausführen.';
 }
 
@@ -491,43 +472,6 @@ function buildVocab(){
 function buildBlog(){const d=$('#blog');
   d.append(h('div',{class:'doc-head'},'lucy-in-la.blog · Tuesday, March 14'),h('div',{class:'doc-title'},'Waiting for my big break'));
   BLOG_LINES.forEach((l,i)=>d.append(h('div',{class:'ln'+(l.ps&&i?' ps':'')},h('span',{class:'n'},(i+1)%5===0?String(i+1):''),h('span',{},l.t))));
-}
-
-/* =================== listening =================== */
-const DIALOGUE=[
-{who:'MAYA',t:"Excuse me, is this the line for the extras? I'm supposed to be in the hospital scene."},
-{who:'JAKE',t:"You're in the right place. I'm Jake. First day?"},
-{who:'MAYA',t:"Is it that obvious? I'm Maya. I got the call last night at eleven o'clock. They told me to be here at five thirty this morning."},
-{who:'JAKE',t:"Welcome to Hollywood. Did they tell you to bring three different outfits?"},
-{who:'MAYA',t:"Three? I only brought one, a blue sweater."},
-{who:'JAKE',t:"Don't worry. Wardrobe will probably give you a nurse's uniform anyway. Have you had breakfast? The catering truck is behind sound stage twelve. The pancakes are terrible, but the coffee is free."},
-{who:'MAYA',t:"Thanks! So, how long have you been doing this?"},
-{who:'JAKE',t:"Eight years. I've been a police officer, a zombie, a soldier, and a waiter in about forty films. You've probably seen the back of my head a hundred times."},
-{who:'MAYA',t:"Do you ever get speaking roles?"},
-{who:'JAKE',t:"Twice. Once I said, 'Your table is ready, sir', to Brad Pitt's stunt double. My mother still tells everybody about it."},
-{who:'MAYA',t:"That's amazing! And can you live on it?"},
-{who:'JAKE',t:"Not really. Extras get about two hundred dollars for a twelve-hour day. I also drive for a delivery app at night. But I love being on set. Where else do you get paid to watch movies being made?"},
-{who:'MAYA',t:"My parents think I'm crazy."},
-{who:'JAKE',t:"Mine too. Here's my advice: be on time, be quiet when the red light is on, and never, ever talk to the stars unless they talk to you first."},
-{who:'ASSISTANT',t:"Background actors for scene forty-two, to stage twelve, please!"},
-{who:'JAKE',t:"That's us. Come on, Nurse Maya."}
-];
-const VOICE={MAYA:{voice:1,pitch:1.15},JAKE:{voice:0,pitch:.85},ASSISTANT:{voice:2,pitch:1}};
-function buildListening(){
-  const sc=$('#script');sc.append(h('div',{class:'slug'},'EXT. STUDIO LOT – SOUND STAGE 12 – EARLY MORNING'));
-  const blocks=DIALOGUE.map(l=>{const b=h('div',{class:'blk'},h('div',{class:'cue'},l.who),h('div',{},l.t));sc.append(b);return b});
-  let playing=false,idx=0,plays=store.get('plays',0);
-  const stat=$('#play-stat'),playBtn=$('#play-btn');
-  const upd=()=>{stat.textContent=plays+'× gehört';playBtn.textContent=playing?'▶ läuft …':'▶ Abspielen'};upd();
-  if(!tts.ok){const n=$('#tts-note');n.hidden=false;n.textContent='Dein Browser kann hier nicht vorlesen. Öffne das Transkript unten und lies das Gespräch stattdessen.';playBtn.disabled=true;$('#stop-btn').disabled=true;return}
-  const clear=()=>blocks.forEach(b=>b.classList.remove('now'));
-  const next=()=>{if(!playing)return;if(idx>=DIALOGUE.length){playing=false;clear();plays++;store.set('plays',plays);upd();return}
-    const l=DIALOGUE[idx];clear();blocks[idx].classList.add('now');
-    say(l.t,{...VOICE[l.who],rate:+$('#rate').value,onend(){idx++;setTimeout(next,450)}})};
-  playBtn.addEventListener('click',()=>{if(playing)return;speechSynthesis.cancel();loadVoices();
-    if(!tts.voices.length){const n=$('#tts-note');n.hidden=false;n.textContent='Keine englische Stimme gefunden – es wird die Standardstimme deines Browsers benutzt. Falls nichts zu hören ist, nutze das Transkript.'}
-    playing=true;idx=0;upd();next()});
-  $('#stop-btn').addEventListener('click',()=>{playing=false;speechSynthesis.cancel();clear();upd()});
 }
 
 /* =================== writing pads =================== */
@@ -617,7 +561,6 @@ const SECTIONS=[
  {id:'emph',label:'Adding emphasis',ex:['g3a','g3b','g3c']},
  {id:'rep',label:'Reported speech',ex:['g4a','g4b','g4c','g4d']},
  {id:'read',label:'Leseverstehen',grp:'Kompetenzen',ex:['r1','r2','r4','r3']},
- {id:'listen',label:'Hörverstehen',ex:['l1']},
  {id:'char',label:'Charakterisierung',ex:['c1','c2','c4','c3','pad-char']},
  {id:'med',label:'Sprachmittlung',ex:['m1','pad-med']},
  {id:'test',label:'Probearbeit',grp:'Prüfen',ex:['test']},
@@ -634,7 +577,7 @@ function refreshProgress(){
   SECTIONS.filter(s=>s.ex).forEach(s=>{const p=secPct(s);prog.append(h('button',{class:'prog-row',type:'button',onclick(){go(s.id)}},h('span',{},s.label),h('span',{class:'pct'},p+' %'),h('span',{class:'bar'},h('i',{style:'width:'+p+'%'}))))});
   prog.append(h('button',{class:'prog-row',type:'button',onclick(){go('review')}},h('span',{},'Fehlertrainer: offene Fehler'),h('span',{class:'pct'},String(wrongN))));
 }
-const PLAN=['Vokabeln Greenline 5, Lektion 1: Karteikarten, Zuordnen, Rechtschreibung','Grammatik: Infinitiv mit / ohne to','Grammatik: Gerund oder Infinitiv – inkl. remember/stop/try','Grammatik: Adding emphasis','Grammatik: Reported speech (if/whether, backshift, told sb to)','Leseverstehen: Lucys Blog mit allen Aufgaben','Charakterisierung: Theorie + vier Übungen','Charakterisierung von Lucy schreiben und mit Muster vergleichen','Hörverstehen oder Sprachmittlung – je nachdem, was drankommt','Probearbeit: mind. 80 %','Fehlertrainer leer machen'];
+const PLAN=['Vokabeln Greenline 5, Lektion 1: Karteikarten, Zuordnen, Rechtschreibung','Grammatik: Infinitiv mit / ohne to','Grammatik: Gerund oder Infinitiv – inkl. remember/stop/try','Grammatik: Adding emphasis','Grammatik: Reported speech (if/whether, backshift, told sb to)','Leseverstehen: Lucys Blog mit allen Aufgaben','Charakterisierung: Theorie + vier Übungen','Charakterisierung von Lucy schreiben und mit Muster vergleichen','Sprachmittlung: Artikel lesen, E-Mail schreiben','Probearbeit: mind. 80 %','Fehlertrainer leer machen'];
 function buildPlan(){const box=$('#plan');const st=store.get('plan',{});PLAN.forEach((p,i)=>{const cb=h('input',{type:'checkbox',id:'plan-'+i});cb.checked=!!st[i];cb.addEventListener('change',()=>{const s=store.get('plan',{});s[i]=cb.checked;store.set('plan',s)});box.append(h('label',{for:'plan-'+i},cb,h('span',{},p)))})}
 
 function go(id){if(!SECTIONS.some(s=>s.id===id))id='start';
@@ -685,7 +628,7 @@ function buildTest(){const box=$('#test-box');box.innerHTML='';clearInterval(tes
 function boot(){
   buildNav();buildBlog();
   $$('[data-ex]').forEach(el=>{const id=el.dataset.ex;el.replaceWith(buildExercise(id,EX[id]))});
-  buildVocab();buildListening();buildPads();buildPlan();
+  buildVocab();buildPads();buildPlan();
   $('#test-new').addEventListener('click',buildTest);
   $$('.rule,.lead').forEach(el=>{if(el.innerHTML.includes('{L:'))el.innerHTML=fmt(el.innerHTML)});
   refreshProgress();
