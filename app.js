@@ -40,6 +40,11 @@ function vocVariants(en,wa){const out=new Set();const forms=cleanEn(en).split(',
 const traitWords=['ambitious','determined','self-confident','insecure','shy','outgoing','reserved','reliable','hard-working','lazy','selfish','generous','caring','considerate','stubborn','honest','arrogant','modest','vain','sensitive','impatient','curious','creative','cheerful','moody','naive','optimistic','pessimistic','independent','jealous','ruthless','easy-going','resilient','down-to-earth','passionate','vulnerable','brave','self-critical','hopeful','aspiring'];
 
 /* =================== exercises =================== */
+// Reported speech: if/whether austauschbar, "that" nach say/tell optional, Kurzformen ausgeschrieben.
+function rs(...saetze){const out=new Set();const plus=x=>{out.add(x);out.add(x.replace(/n't\b/g,' not').replace(/\bcan not\b/g,'cannot'))};
+  saetze.forEach(x=>{const formen=[x];if(/ if /.test(x))formen.push(x.replace(/ if /,' whether '));
+    formen.slice().forEach(f=>{const m=f.match(/^(.*?\b(?:said|told \w+|explained|answered|promised))( that)? (.*)$/);if(m){formen.push(m[1]+' that '+m[3]);formen.push(m[1]+' '+m[3])}});
+    formen.forEach(plus)});return [...out]}
 const EX={
 g1a:{title:'to oder kein to?',type:'mc',keep:true,intro:'Tipp an, ob <i>to</i> in die Lücke gehört (–  = kein to). Du siehst sofort, ob es stimmt und warum.',items:[
 {q:"My parents won't let me ___ go to the audition alone.",o:['to','–'],a:1,why:'<b>let</b> + Objekt + Infinitiv <b>ohne</b> to.'},
@@ -232,6 +237,57 @@ c3:{title:'Build a paragraph',type:'order',intro:'Tipp die Sätze in der richtig
 'Furthermore, she does not give up after a rejection: after crying in her car, she "put on some lipstick and drove to [her] shift" ({L:put on some lipstick}).',
 'All in all, her behaviour suggests that she will keep fighting for her big break.'
 ],why:'Aufbau: <b>claim</b> → <b>evidence</b> → <b>explanation</b> → weiterer Beleg (mit Furthermore angeschlossen) → <b>Schlussfolgerung</b>.'},
+g4a:{title:'Backshift',type:'mc',intro:'Wähl die Form in der indirekten Rede. Achtung: Nicht jeder Satz braucht backshift.',items:[
+{q:'"I live in LA." → Lucy said that she ___ in LA.',o:['lived','lives','has lived'],a:0,why:'present simple → <b>past simple</b>.'},
+{q:'"I am working in a diner." → She said she ___ in a diner.',o:['was working','is working','worked'],a:0,why:'present progressive → <b>past progressive</b>.'},
+{q:'"I have had three auditions." → She told me she ___ three auditions.',o:['had had','has had','had'],a:0,why:'present perfect → <b>past perfect</b> (had + had).'},
+{q:'"I got a callback." → She said she ___ a callback.',o:['had got','got','has got'],a:0,why:'past simple → <b>past perfect</b>.'},
+{q:'"I will call you." → He promised he ___ me.',o:['would call','will call','called'],a:0,why:'will → <b>would</b>.'},
+{q:'"I can\'t pay the rent." → She said she ___ the rent.',o:["couldn't pay","can't pay","didn't pay"],a:0,why:'can → <b>could</b>.'},
+{q:'"We must leave early." → They said they ___ early.',o:['had to leave','must leave','musted leave'],a:0,why:'must → <b>had to</b>.'},
+{q:'"I\'m going to move to LA." → He said he ___ to LA.',o:['was going to move','is going to move','will move'],a:0,why:'am going to → <b>was going to</b>.'},
+{q:'"The film is great." → Maya <b>says</b> the film ___ great.',o:['is','was','had been'],a:0,why:'Einleitung im <b>present</b> (says) → <b>kein</b> backshift.'},
+{q:'"Jake has been an extra for eight years." → Maya explained that Jake ___ an extra for eight years.',o:['had been','has been','was'],a:0,why:'present perfect → past perfect.'},
+{q:'"My parents don\'t understand me." → Lucy said her parents ___ her.',o:["didn't understand","don't understand","hadn't understood"],a:0,why:'present simple → past simple; my → <b>her</b>.'},
+{q:'"I\'m meeting the director tomorrow." → She said she was meeting the director ___.',o:['the next day','tomorrow','yesterday'],a:0,why:'tomorrow → <b>the next day</b> / the following day.'}
+]},
+g4b:{title:'Questions: if / whether',type:'rewrite',intro:'Schreib die Frage in indirekter Rede. Ja/Nein-Fragen mit <b>if</b> oder <b>whether</b>, Fragen mit Fragewort behalten das Fragewort. Danach steht der Satz wie eine Aussage: <b>kein do/does/did</b>, Subjekt vor dem Verb.',items:[
+{p:'Jake to Maya: "Do you like Los Angeles?"',task:'if / whether',start:'Jake asked Maya …',a:rs('Jake asked Maya if she liked Los Angeles'),why:'Ja/Nein-Frage → if/whether; do weg; like → liked.'},
+{p:'Jake to Maya: "Are you nervous?"',task:'if / whether',start:'Jake asked Maya …',a:rs('Jake asked Maya if she was nervous'),why:'are → was; Subjekt vor dem Verb.'},
+{p:'Jake to Maya: "Have you had breakfast?"',task:'if / whether',start:'Jake asked Maya …',a:rs('Jake asked Maya if she had had breakfast'),why:'have had → had had.'},
+{p:'Maya to Jake: "Can you live on it?"',task:'if / whether',start:'Maya asked Jake …',a:rs('Maya asked Jake if he could live on it'),why:'can → could.'},
+{p:'Jake to Maya: "Did they tell you to bring three outfits?"',task:'if / whether',start:'Jake asked Maya …',a:rs('Jake asked Maya if they had told her to bring three outfits'),why:'did tell → had told; you → her.'},
+{p:'The director to Lucy: "Where do you live?"',task:'Fragewort',start:'The director asked Lucy …',a:rs('The director asked Lucy where she lived'),why:'Fragewort bleibt, do weg: where she <b>lived</b> (nicht where did she live).'},
+{p:'Maya to Jake: "How long have you been doing this?"',task:'Fragewort',start:'Maya asked Jake …',a:rs('Maya asked Jake how long he had been doing that','Maya asked Jake how long he had been doing this'),why:'have been → had been; this → that.'},
+{p:'Lucy to the agent: "What is my next audition?"',task:'Fragewort',start:'Lucy asked the agent …',a:rs('Lucy asked the agent what her next audition was'),why:'Subjekt (her next audition) vor dem Verb (was).'},
+{p:'Jess to Lucy: "Why are you crying?"',task:'Fragewort',start:'Jess asked Lucy …',a:rs('Jess asked Lucy why she was crying'),why:'are crying → was crying.'},
+{p:'The extras: "When will the shoot start?"',task:'Fragewort',start:'The extras asked …',a:rs('The extras asked when the shoot would start'),why:'will → would.'}
+]},
+g4c:{title:'Statements and commands',type:'rewrite',intro:'Aussagen mit <b>said / told sb (that)</b>, Aufforderungen mit <b>told / asked sb (not) to</b> + Infinitiv. Pronomen, Zeit und Ort anpassen.',items:[
+{p:'Lucy: "I love acting."',task:'said',start:'Lucy said …',a:rs('Lucy said that she loved acting')},
+{p:'Lucy\'s dad to Lucy: "You\'ll be back by Christmas."',task:'told',start:'Her dad told her …',a:rs('Her dad told her that she would be back by Christmas'),why:'will → would; you → she.'},
+{p:'Jess to Lucy: "You\'re smart."',task:'told',start:'Jess told Lucy …',a:rs('Jess told Lucy that she was smart')},
+{p:'The agent to Lucy: "I have good news for you."',task:'told',start:'The agent told Lucy …',a:rs('The agent told Lucy that she had good news for her'),why:'have → had; you → her.'},
+{p:'The director to the actors: "Don\'t look into the camera!"',task:'Aufforderung',start:'The director told the actors …',a:rs('The director told the actors not to look into the camera'),why:'Verbot → <b>told sb not to</b> + Infinitiv.'},
+{p:'Jake to Maya: "Be on time."',task:'Aufforderung',start:'Jake told Maya …',a:rs('Jake told Maya to be on time'),why:'Aufforderung → told sb <b>to</b> + Infinitiv.'},
+{p:'Maya to Jake: "Please help me."',task:'Bitte',start:'Maya asked Jake …',a:rs('Maya asked Jake to help her'),why:'Bitte → <b>asked sb to</b>; me → her.'},
+{p:'Lucy: "I saw the Hollywood sign yesterday."',task:'said',start:'Lucy said …',a:rs('Lucy said that she had seen the Hollywood sign the day before','Lucy said that she had seen the Hollywood sign the previous day'),why:'saw → had seen; yesterday → the day before.'},
+{p:'Jake to Maya: "I\'ll see you here tomorrow."',task:'told',start:'Jake told Maya …',a:rs('Jake told Maya that he would see her there the next day','Jake told Maya that he would see her there the following day'),why:'here → there; tomorrow → the next day.'},
+{p:'The casting director to Lucy: "We can\'t give you the part."',task:'told',start:'The casting director told Lucy …',a:rs("The casting director told Lucy that they couldn't give her the part"),why:'can\'t → couldn\'t; we → they; you → her.'}
+]},
+g4d:{title:'say, tell & Co.',type:'mc',intro:'Typische Fallen in der indirekten Rede.',items:[
+{q:'She ___ me that she was tired.',o:['told','said','asked'],a:0,why:'<b>tell</b> + Person: told me. <b>say</b> ohne Person (oder say <i>to</i> me).'},
+{q:'He ___ that he was hungry.',o:['said','told','asked'],a:0,why:'Keine Person dahinter → said.'},
+{q:'She asked me ___ I liked the film.',o:['if','that','do'],a:0,why:'Ja/Nein-Frage → if/whether.'},
+{q:'He asked me where ___.',o:['I lived','did I live','do I live'],a:0,why:'Indirekte Frage = Aussage-Wortstellung, kein did.'},
+{q:'She wanted to know ___ ready.',o:['whether I was','was I','if was I'],a:0,why:'whether + Subjekt + Verb.'},
+{q:'The teacher told us ___ late.',o:['not to be',"don't be",'to not being'],a:0,why:'Verbot → not to + Infinitiv.'},
+{q:'"now" wird in der indirekten Rede meist zu …',o:['then','there','that day'],a:0},
+{q:'"today" wird zu …',o:['that day','the day before','tomorrow'],a:0},
+{q:'"last week" wird zu …',o:['the week before','the next week','this week'],a:0},
+{q:'"two days ago" wird zu …',o:['two days before','two days later','in two days'],a:0},
+{q:'"here" wird zu …',o:['there','then','that'],a:0}
+]},
 m1:{title:'Mediation tools',type:'mc',intro:'Wie gibst du diese Stellen auf Englisch wieder?',items:[
 {q:'„Komparsen / Statisten“',o:['extras','statists','comparses','supporters'],a:0,why:'extra = Statist/in. <i>Statist</i> gibt es im Englischen so nicht.'},
 {q:'„Schauspielergewerkschaft“ – für Ethan am besten:',o:['the actors\' union','the Schauspielergewerkschaft','the actors\' trade club society','the workers\' party'],a:0,why:'Kennst du das Wort nicht: umschreiben – "an organization that protects actors\' rights".'},
@@ -559,6 +615,7 @@ const SECTIONS=[
  {id:'inf',label:'Infinitive: to?',ex:['g1a','g1b']},
  {id:'ger',label:'Gerund or infinitive',ex:['g2s','g2a','g2b']},
  {id:'emph',label:'Adding emphasis',ex:['g3a','g3b','g3c']},
+ {id:'rep',label:'Reported speech',ex:['g4a','g4b','g4c','g4d']},
  {id:'read',label:'Leseverstehen',grp:'Kompetenzen',ex:['r1','r2','r4','r3']},
  {id:'listen',label:'Hörverstehen',ex:['l1']},
  {id:'char',label:'Charakterisierung',ex:['c1','c2','c4','c3','pad-char']},
@@ -577,7 +634,7 @@ function refreshProgress(){
   SECTIONS.filter(s=>s.ex).forEach(s=>{const p=secPct(s);prog.append(h('button',{class:'prog-row',type:'button',onclick(){go(s.id)}},h('span',{},s.label),h('span',{class:'pct'},p+' %'),h('span',{class:'bar'},h('i',{style:'width:'+p+'%'}))))});
   prog.append(h('button',{class:'prog-row',type:'button',onclick(){go('review')}},h('span',{},'Fehlertrainer: offene Fehler'),h('span',{class:'pct'},String(wrongN))));
 }
-const PLAN=['Vokabeln Greenline 5, Lektion 1: Karteikarten, Zuordnen, Rechtschreibung','Grammatik: Infinitiv mit / ohne to','Grammatik: Gerund oder Infinitiv – inkl. remember/stop/try','Grammatik: Adding emphasis','Leseverstehen: Lucys Blog mit allen Aufgaben','Charakterisierung: Theorie + vier Übungen','Charakterisierung von Lucy schreiben und mit Muster vergleichen','Hörverstehen oder Sprachmittlung – je nachdem, was drankommt','Probearbeit: mind. 80 %','Fehlertrainer leer machen'];
+const PLAN=['Vokabeln Greenline 5, Lektion 1: Karteikarten, Zuordnen, Rechtschreibung','Grammatik: Infinitiv mit / ohne to','Grammatik: Gerund oder Infinitiv – inkl. remember/stop/try','Grammatik: Adding emphasis','Grammatik: Reported speech (if/whether, backshift, told sb to)','Leseverstehen: Lucys Blog mit allen Aufgaben','Charakterisierung: Theorie + vier Übungen','Charakterisierung von Lucy schreiben und mit Muster vergleichen','Hörverstehen oder Sprachmittlung – je nachdem, was drankommt','Probearbeit: mind. 80 %','Fehlertrainer leer machen'];
 function buildPlan(){const box=$('#plan');const st=store.get('plan',{});PLAN.forEach((p,i)=>{const cb=h('input',{type:'checkbox',id:'plan-'+i});cb.checked=!!st[i];cb.addEventListener('change',()=>{const s=store.get('plan',{});s[i]=cb.checked;store.set('plan',s)});box.append(h('label',{for:'plan-'+i},cb,h('span',{},p)))})}
 
 function go(id){if(!SECTIONS.some(s=>s.id===id))id='start';
@@ -606,7 +663,7 @@ let testTimer=null;
 function noteFor(p){return p>=.92?['1','sehr gut']:p>=.81?['2','gut']:p>=.67?['3','befriedigend']:p>=.5?['4','ausreichend']:p>=.3?['5','mangelhaft']:['6','ungenügend']}
 function buildTest(){const box=$('#test-box');box.innerHTML='';clearInterval(testTimer);
   const pick=(exId,n)=>shuffle(EX[exId].items.map((_,i)=>exId+'-'+i)).slice(0,n);
-  const partA=[...pick('g1a',4),...pick('g1b',2),...pick('g2s',2),...pick('g2a',4),...pick('g2b',3),...pick('g3a',2),...pick('g3b',2),...pick('g3c',1)];
+  const partA=[...pick('g1a',4),...pick('g1b',2),...pick('g2s',2),...pick('g2a',4),...pick('g2b',3),...pick('g3a',2),...pick('g3b',2),...pick('g3c',1),...pick('g4a',2),...pick('g4b',2),...pick('g4c',1)];
   const partB=shuffle(ALLVOC).slice(0,5).map(vocId);
   const ctrls=[];
   const mk=(ids,title,hint)=>{const ol=h('ol',{class:'items'});ids.forEach(id=>{const c=ctrlFor(id,'t');ctrls.push({id,c});ol.append(c.el)});return h('section',{class:'ex'},h('div',{class:'part-h'},title),h('p',{class:'ex-intro'},hint),ol)};
